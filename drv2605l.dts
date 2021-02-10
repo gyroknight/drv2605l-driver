@@ -1,0 +1,30 @@
+/**
+ * Device tree overlay for DRV2605L haptic motor controller.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/input/ti-drv260x.h>
+#include <dt-bindings/gpio/gpio.h>
+
+/ {
+	fragment@0 {
+		target = <&i2c_arm>;
+		__overlay__ {
+			#address-cells = <0x1>;
+			#size-cells = <0x0>;
+		
+			haptics: haptics@5a {
+				compatible = "ti,drv2605l";
+				reg = <0x5a>;
+				// vbat-supply = <&vbat>;
+				// enable-gpio = <&gpio 28 GPIO_ACTIVE_HIGH>;
+				mode = <DRV260X_LRA_MODE>;
+				library-sel = <DRV260X_LIB_LRA>;
+				vib-rated-mv = <2500>;
+				vib-overdrive-mv = <2500>;
+			};
+		};
+	};
+};
